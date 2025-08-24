@@ -25,8 +25,8 @@ export async function up(knex: Knex): Promise<void> {
             t.string('code', 50).notNullable().unique(); // 'FACEBOOK','INSTAGRAM',...
             t.string('name', 100).notNullable();
             t.jsonb('meta').notNullable().defaultTo('{}'); // e.g. {icon:'fb', auth:'oauth2'}
-            t.boolean('is_active').notNullable().defaultTo(true);
             t.integer('weight').notNullable().defaultTo(0);
+            t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamps(true, true);
         });
 
