@@ -5,7 +5,7 @@ import path from 'path';
 import * as fs from "node:fs";
 
 // import errorPlugin from "./plugins/error";
-// import pgsqlPlugin from './plugins/pgsql';
+import pgsqlPlugin from './plugins/pgsql';
 // import redisPlugin from './plugins/redis';
 // import axiosPlugin from './plugins/axios';
 // import cronPlugin from './plugins/cron';
@@ -48,7 +48,7 @@ fastify.register(cors, {
 });
 
 // fastify.register(errorPlugin);
-// fastify.register(pgsqlPlugin);
+fastify.register(pgsqlPlugin);
 // fastify.register(redisPlugin);
 // fastify.register(axiosPlugin);
 // fastify.register(cronPlugin);
@@ -57,7 +57,7 @@ fastify.register(cors, {
 
 const start = async () => {
     try {
-        const port: number = parseInt(process.env.PORT || "5651", 10);
+        const port: number = parseInt(process.env.PORT || "5751", 10);
         await fastify.listen({port: port, host: '0.0.0.0'});
         console.log('Server listening on port :', port);
     } catch (e) {
