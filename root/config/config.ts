@@ -14,11 +14,11 @@ interface Config {
             },
             TABLES: {
                 TB_FLOW_PLATFORMS: string,
-                TB_FLOW_SOURCES: string,
+                // TB_FLOW_SOURCES: string,
                 TB_FLOW_SETTINGS: string,
             },
             SEED_DATA: {
-                TB_FLOW_PLATFORMS_PATH: string,
+                FLOW_PLATFORMS_PATH: string,
             }
         }
     },
@@ -43,11 +43,11 @@ export const config: Config = {
             },
             TABLES: {
                 TB_FLOW_PLATFORMS: 'tb_flow_platforms',
-                TB_FLOW_SOURCES: 'tb_flow_sources',
+                // TB_FLOW_SOURCES: 'tb_flow_sources',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
             },
             SEED_DATA: {
-                TB_FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platform.json',
+                FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platforms.json',
             }
         }
     },
