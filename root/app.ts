@@ -10,7 +10,7 @@ import pgsqlPlugin from './plugins/pgsql';
 // import axiosPlugin from './plugins/axios';
 // import cronPlugin from './plugins/cron';
 
-// import boardRoute from "./modules/board/board.route";
+import flowPRoute from "./modules/flow_platform/flow.p.route";
 
 const log_path = path.join(__dirname, 'logs');
 if (!fs.existsSync(log_path)) {
@@ -53,7 +53,7 @@ fastify.register(pgsqlPlugin);
 // fastify.register(axiosPlugin);
 // fastify.register(cronPlugin);
 
-// fastify.register(boardRoute, {prefix: '/board'});
+fastify.register(flowPRoute, {prefix: '/board'});
 
 const start = async () => {
     try {

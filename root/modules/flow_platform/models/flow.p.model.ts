@@ -4,6 +4,7 @@ import {config} from '../../../config/config';
 import {IFlowP} from "../interfaces/flow.p.interface";
 
 import {CreateFlowPDto} from "../dto/create.flow.p.dto";
+import {QueryFlowPDto} from "../dto/query.flow.p.dto";
 
 const {
     DB_DATA: {
@@ -24,12 +25,12 @@ export class FlowPModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: Partial<QueryBoardRoleDto>): Promise<IFlowP | undefined> {
+    async readOne(query: Partial<QueryFlowPDto>): Promise<IFlowP | undefined> {
         return this.fastify.pgsql(TB_FLOW_PLATFORMS).select('*')
             .where(query).first();
     }
 
-    async readAll(query: Partial<QueryBoardRoleDto>): Promise<IFlowP[]> {
+    async readAll(query: Partial<QueryFlowPDto>): Promise<IFlowP[]> {
         return this.fastify.pgsql(TB_FLOW_PLATFORMS).select('*')
             .where(query);
     }
