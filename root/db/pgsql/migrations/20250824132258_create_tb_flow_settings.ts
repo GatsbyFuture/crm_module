@@ -1,16 +1,12 @@
 import type {Knex} from "knex";
 import {config} from '../../../config/config';
-import path from "path";
-import fs from "fs";
 
 const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
-                TB_FLOW_SETTINGS
-            },
-            SEED_DATA: {
-                FLOW_PLATFORMS_PATH
+                TB_FLOW_SETTINGS,
+                TB_FLOW_PLATFORMS
             }
         }
     }
@@ -22,11 +18,21 @@ export async function up(knex: Knex): Promise<void> {
 
         await knex.schema.createTable(TB_FLOW_SETTINGS, (t) => {
             t.increments('id').primary();
-            t.string('code', 50).notNullable().unique();
+
+            t.integer('platform_id').unsigned()
+                .references('id').inTable(TB_FLOW_PLATFORMS)
+                .onDelete('CASCADE').notNullable();
+            t.string('platform_code', 50).notNullable();
+
             t.string('name', 100).notNullable();
+
+            t.integer('board_id').notNullable().defaultTo(0);
+            t.integer('column_id').notNullable().defaultTo(0);
+            t.string('desc', 100).notNullable().defaultTo('');
+
             t.jsonb('meta').notNullable().defaultTo('{}');
+
             t.boolean('is_active').notNullable().defaultTo(true);
-            t.integer('weight').notNullable().defaultTo(0);
             t.timestamps(true, true);
         });
 

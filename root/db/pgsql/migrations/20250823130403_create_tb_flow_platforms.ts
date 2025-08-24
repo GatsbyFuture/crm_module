@@ -36,6 +36,14 @@ export async function up(knex: Knex): Promise<void> {
 
         await knex(TB_FLOW_PLATFORMS).insert(parsed.values);
 
+        // this is trigger for updated_at colum in tb_users
+        await knex.raw(`
+            CREATE TRIGGER update_${TB_FLOW_PLATFORMS}_updated_at
+            BEFORE UPDATE ON ${TB_FLOW_PLATFORMS}
+            FOR EACH ROW
+            EXECUTE FUNCTION set_updated_at();
+        `);
+
         console.log(`Created ${TB_FLOW_PLATFORMS} table successfully!!!`);
     } catch (e) {
         console.error(`Error creating ${TB_FLOW_PLATFORMS} table:`, e);
