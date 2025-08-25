@@ -54,4 +54,12 @@ export class UtmService {
             throw e;
         }
     }
+
+    async deleteMany(ids: number[]): Promise<Partial<IUtm>[]> {
+        try {
+            return this.utmModel.deleteMany(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

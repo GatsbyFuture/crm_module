@@ -37,6 +37,6 @@ export class UtmModel {
 
     async deleteMany(ids: number[]): Promise<Partial<IUtm>[]> {
         return this.fastify.pgsql(TB_UTM_TAGS).whereIn('id', ids)
-            .returning(['code', 'name']).del();
+            .returning(['url', 'utm_source']).del();
     }
 }

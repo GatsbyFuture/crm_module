@@ -67,3 +67,24 @@ export const optsGetAllUtm: RouteShorthandOptions = {
         querystring: getAllUtm
     }
 }
+
+const delManyUtm = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyUtm: RouteShorthandOptions = {
+    schema: {
+        body: delManyUtm
+    }
+}

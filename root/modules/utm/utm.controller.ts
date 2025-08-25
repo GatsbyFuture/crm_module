@@ -2,6 +2,7 @@ import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {UtmService} from "./utm.service";
 import {CreateUtmDto} from "./dto/create.utm.dto";
 import {QueryUtmDto} from "./dto/query.utm.dto";
+import {DeleteUtmDto} from "./dto/delete.utm.dto";
 
 export class UtmController {
     private utmService: UtmService;
@@ -34,6 +35,15 @@ export class UtmController {
         return {
             success: true,
             data: await this.utmService.getAll(queryUtmDto),
+        }
+    }
+
+    async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
+        const deleteUtmDto = req.body as DeleteUtmDto;
+
+        return {
+            success: true,
+            data: await this.utmService.deleteMany(deleteUtmDto.ids),
         }
     }
 }
