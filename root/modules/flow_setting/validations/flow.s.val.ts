@@ -65,7 +65,7 @@ export const optsGetAllFlowS: RouteShorthandOptions = {
     }
 }
 
-const delManyFlowP = {
+const delManyFlowS = {
     type: 'object',
     required: ['ids'],
     properties: {
@@ -80,8 +80,8 @@ const delManyFlowP = {
     }
 }
 
-export const optsDelManyFlowP: RouteShorthandOptions = {
+export const optsDelManyFlowS: RouteShorthandOptions = {
     schema: {
-        body: delManyFlowP
+        body: delManyFlowS
     }
 }

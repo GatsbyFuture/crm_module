@@ -3,6 +3,7 @@ import {FlowSService} from "./flow.s.service";
 
 import {CreateFlowSDto} from "./dto/create.flow.s.dto";
 import {QueryFlowSDto} from "./dto/query.flow.s.dto";
+import {DeleteFlowSDto} from "./dto/delete.flow.s.dto";
 
 
 export class FlowSController {
@@ -37,6 +38,15 @@ export class FlowSController {
         return {
             success: true,
             data: await this.flowSService.getAll(queryFlowSDto)
+        }
+    }
+
+    async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
+        const deleteFlowSDto = req.body as DeleteFlowSDto;
+
+        return {
+            success: true,
+            data: await this.flowSService.deleteMany(deleteFlowSDto.ids)
         }
     }
 }
