@@ -28,4 +28,13 @@ export class FlowPController {
             data: await this.flowPService.getOne(queryFlowPDto)
         }
     }
+
+    async getAll(req: FastifyRequest, reply: FastifyReply) {
+        const queryFlowPDto = req.query as Partial<QueryFlowPDto>;
+
+        return {
+            success: true,
+            data: await this.flowPService.getAll(queryFlowPDto)
+        }
+    }
 }

@@ -46,4 +46,12 @@ export class FlowPService {
             throw e;
         }
     }
+
+    async getAll(query: Partial<QueryFlowPDto>): Promise<IFlowP[]> {
+        try {
+            return await this.flowPModel.readAll(query);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

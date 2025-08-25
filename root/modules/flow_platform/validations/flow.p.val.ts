@@ -41,3 +41,17 @@ export const optsGetOneFlowP: RouteShorthandOptions = {
     }
 }
 
+const queryGetAllFlowP = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    }
+}
+
+export const optsGetAllFlowP: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetAllFlowP,
+    }
+}
