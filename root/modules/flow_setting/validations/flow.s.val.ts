@@ -45,3 +45,43 @@ export const optsGetOneFlowS: RouteShorthandOptions = {
         querystring: queryGetOneFlowS,
     }
 }
+
+const queryGetAllFlowS = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        platform_id: {type: 'integer', minimum: 1},
+        platform_code: {type: 'string', minLength: 1},
+        name: {type: 'string'},
+        board_id: {type: 'integer'},
+        column_id: {type: 'integer'},
+        is_active: {type: 'boolean'},
+    }
+}
+
+export const optsGetAllFlowS: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetAllFlowS,
+    }
+}
+
+const delManyFlowP = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyFlowP: RouteShorthandOptions = {
+    schema: {
+        body: delManyFlowP
+    }
+}

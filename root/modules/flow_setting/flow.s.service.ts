@@ -43,4 +43,12 @@ export class FlowSService {
             throw e;
         }
     }
+
+    async getAll(query: Partial<QueryFlowSDto>): Promise<IFlowS[]> {
+        try {
+            return await this.flowSModel.readAll(query);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

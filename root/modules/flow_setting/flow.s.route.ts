@@ -10,4 +10,6 @@ export default async function flowSRoute(fastify: FastifyInstance) {
     fastify.post('/create', optsCreateFlowS, flowSController.create.bind(flowSController));
 
     fastify.get('/get-one', optsGetOneFlowS, flowSController.getOne.bind(flowSController));
+
+    fastify.get('/get-all', flowSController.getAll.bind(flowSController));
 }

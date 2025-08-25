@@ -22,12 +22,21 @@ export class FlowSController {
         }
     }
 
-    async getOne(req: FastifyRequest, reply: FastifyReply) {
-        const queryFlowSDto = req.query as QueryFlowSDto;
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
+        const queryFlowSDto = req.query as Partial<QueryFlowSDto>;
 
         return {
             success: true,
             data: await this.flowSService.getOne(queryFlowSDto)
+        }
+    }
+
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
+        const queryFlowSDto = req.query as Partial<QueryFlowSDto>;
+
+        return {
+            success: true,
+            data: await this.flowSService.getAll(queryFlowSDto)
         }
     }
 }
