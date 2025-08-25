@@ -1,5 +1,7 @@
-import type {FastifyInstance} from "fastify";
+import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {FlowSService} from "./flow.s.service";
+
+import {CreateFlowSDto} from "./dto/create.flow.s.dto";
 
 
 export class FlowSController {
@@ -10,4 +12,12 @@ export class FlowSController {
     }
 
     // CRUD
+    async create(req: FastifyRequest, _reply: FastifyReply) {
+        const createFlowSDto = req.body as CreateFlowSDto;
+
+        return {
+            success: true,
+            data: await this.flowSService.create(createFlowSDto)
+        }
+    }
 }

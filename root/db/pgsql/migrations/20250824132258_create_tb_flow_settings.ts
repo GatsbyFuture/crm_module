@@ -19,7 +19,7 @@ export async function up(knex: Knex): Promise<void> {
         await knex.schema.createTable(TB_FLOW_SETTINGS, (t) => {
             t.increments('id').primary();
 
-            t.integer('platform_id').unsigned()
+            t.integer('platform_id')
                 .references('id').inTable(TB_FLOW_PLATFORMS)
                 .onDelete('CASCADE').notNullable();
             t.string('platform_code', 50).notNullable();
@@ -34,6 +34,8 @@ export async function up(knex: Knex): Promise<void> {
 
             t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamps(true, true);
+
+            t.unique(['platform_id', 'board_id', 'column_id'], 'uq_flow_settings_platform_board_column');
         });
 
         // this is trigger for updated_at colum in tb_users

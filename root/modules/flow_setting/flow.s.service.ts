@@ -1,5 +1,9 @@
 import type {FastifyInstance} from "fastify";
 import {FlowSModel} from "./models/flow.s.model";
+import {CreateFlowSDto} from "./dto/create.flow.s.dto";
+import {IFlowS} from "./interfaces/flow.s.interface";
+import {HttpException} from "../../errors/custom.errors";
+import {ErrorCodes} from "../../enums/error.codes";
 
 export class FlowSService {
     private flowSModel: FlowSModel;
@@ -9,4 +13,19 @@ export class FlowSService {
     }
 
     // CRUD
+    async create(createFlowSDto: CreateFlowSDto): Promise<IFlowS> {
+        try {
+            const {name} = createFlowSDto;
+
+            const flow_setting = await this.flowSModel.readOne({name: name});
+
+            if (flow_setting) {
+                throw new HttpException(ErrorCodes.FLOW_SETTING_ALREADY_EXIST);
+            }
+
+            return await this.flowSModel.create(createFlowSDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
