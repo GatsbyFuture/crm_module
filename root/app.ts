@@ -12,6 +12,7 @@ import pgsqlPlugin from './plugins/pgsql';
 
 import flowPRoute from "./modules/flow_platform/flow.p.route";
 import flowSRoute from "./modules/flow_setting/flow.s.route";
+import utmRoute from "./modules/utm/utm.route";
 
 const log_path = path.join(__dirname, 'logs');
 if (!fs.existsSync(log_path)) {
@@ -56,6 +57,7 @@ fastify.register(pgsqlPlugin);
 
 fastify.register(flowPRoute, {prefix: '/flow-platform'});
 fastify.register(flowSRoute, {prefix: '/flow-setting'});
+fastify.register(utmRoute, {prefix: '/utm-tag'});
 
 const start = async () => {
     try {
