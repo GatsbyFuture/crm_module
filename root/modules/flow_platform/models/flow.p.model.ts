@@ -20,8 +20,8 @@ export class FlowPModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createBoardRoleDto: CreateFlowPDto): Promise<IFlowP> {
-        return this.fastify.pgsql(TB_FLOW_PLATFORMS).insert(createBoardRoleDto)
+    async create(createFlowPDto: CreateFlowPDto): Promise<IFlowP> {
+        return this.fastify.pgsql(TB_FLOW_PLATFORMS).insert(createFlowPDto)
             .returning('*').then(rows => rows[0]);
     }
 

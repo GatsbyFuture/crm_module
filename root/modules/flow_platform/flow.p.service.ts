@@ -1,6 +1,13 @@
 import type {FastifyInstance} from "fastify";
 import {FlowPModel} from "./models/flow.p.model";
 
+import {IFlowP} from "./interfaces/flow.p.interface";
+
+import {HttpException} from "../../errors/custom.errors";
+import {ErrorCodes} from "../../enums/error.codes";
+
+import {CreateFlowPDto} from "./dto/create.flow.p.dto";
+
 export class FlowPService {
     private flowPModel: FlowPModel;
 
@@ -9,4 +16,19 @@ export class FlowPService {
     }
 
     // CRUD
+    async create(createFlowPDto: CreateFlowPDto): Promise<IFlowP> {
+        try {
+            const {name} = createFlowPDto;
+
+            const flow_platform = await this.flowPModel.readOne({name: name});
+
+            if (flow_platform) {
+                throw new HttpException(ErrorCodes.FLOW_PLATFORM_ALREADY_EXIST);
+            }
+
+            return this.flowPModel.create(createFlowPDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
