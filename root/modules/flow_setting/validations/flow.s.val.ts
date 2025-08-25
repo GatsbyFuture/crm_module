@@ -19,3 +19,29 @@ export const optsCreateFlowS: RouteShorthandOptions = {
         body: createFlowS
     }
 }
+
+const queryGetOneFlowS = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        platform_id: {type: 'integer', minimum: 1},
+        platform_code: {type: 'string', minLength: 1},
+        name: {type: 'string'},
+        board_id: {type: 'integer'},
+        column_id: {type: 'integer'},
+        is_active: {type: 'boolean'},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['platform_id']},
+        {required: ['platform_code']},
+        {required: ['board_id']},
+        {required: ['column_id']},
+    ]
+}
+
+export const optsGetOneFlowS: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetOneFlowS,
+    }
+}

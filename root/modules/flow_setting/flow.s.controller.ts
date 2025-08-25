@@ -2,6 +2,7 @@ import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {FlowSService} from "./flow.s.service";
 
 import {CreateFlowSDto} from "./dto/create.flow.s.dto";
+import {QueryFlowSDto} from "./dto/query.flow.s.dto";
 
 
 export class FlowSController {
@@ -18,6 +19,15 @@ export class FlowSController {
         return {
             success: true,
             data: await this.flowSService.create(createFlowSDto)
+        }
+    }
+
+    async getOne(req: FastifyRequest, reply: FastifyReply) {
+        const queryFlowSDto = req.query as QueryFlowSDto;
+
+        return {
+            success: true,
+            data: await this.flowSService.getOne(queryFlowSDto)
         }
     }
 }
