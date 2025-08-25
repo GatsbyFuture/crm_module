@@ -27,3 +27,25 @@ export const optsCreateUtm: RouteShorthandOptions = {
         body: createUtm
     }
 };
+
+const getOneUtm = {
+    type: 'object',
+    properties: {
+        id: {type: 'number', minimum: 1},
+        utm_source: {
+            type: 'string',
+            maxLength: 50,
+            pattern: '^[A-Z]+$'
+        },
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['utm_source']},
+    ]
+}
+
+export const optsGetOneUtm: RouteShorthandOptions = {
+    schema: {
+        querystring: getOneUtm
+    }
+}
