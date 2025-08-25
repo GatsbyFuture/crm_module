@@ -49,3 +49,21 @@ export const optsGetOneUtm: RouteShorthandOptions = {
         querystring: getOneUtm
     }
 }
+
+const getAllUtm = {
+    type: 'object',
+    properties: {
+        id: {type: 'number', minimum: 1},
+        utm_source: {
+            type: 'string',
+            maxLength: 50,
+            pattern: '^[A-Z]+$'
+        },
+    }
+}
+
+export const optsGetAllUtm: RouteShorthandOptions = {
+    schema: {
+        querystring: getAllUtm
+    }
+}

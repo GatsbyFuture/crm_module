@@ -46,4 +46,12 @@ export class UtmService {
             throw e;
         }
     }
+
+    async getAll(query: Partial<QueryUtmDto>): Promise<IUtm[]> {
+        try {
+            return this.utmModel.readAll(query);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

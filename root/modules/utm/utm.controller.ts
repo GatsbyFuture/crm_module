@@ -19,12 +19,21 @@ export class UtmController {
         }
     }
 
-    async getOne(req: FastifyRequest, reply: FastifyReply) {
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
         const queryUtmDto = req.query as Partial<QueryUtmDto>;
 
         return {
             success: true,
             data: await this.utmService.getOne(queryUtmDto),
+        }
+    }
+
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
+        const queryUtmDto = req.query as Partial<QueryUtmDto>;
+
+        return {
+            success: true,
+            data: await this.utmService.getAll(queryUtmDto),
         }
     }
 }
