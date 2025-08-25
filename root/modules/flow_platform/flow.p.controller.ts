@@ -2,6 +2,7 @@ import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {FlowPService} from "./flow.p.service";
 import {CreateFlowPDto} from "./dto/create.flow.p.dto";
 import {QueryFlowPDto} from "./dto/query.flow.p.dto";
+import {DeleteFlowPDto} from "./dto/delete.flow.p.dto";
 
 export class FlowPController {
     private flowPService: FlowPService;
@@ -20,7 +21,7 @@ export class FlowPController {
         }
     }
 
-    async getOne(req: FastifyRequest, reply: FastifyReply) {
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
         const queryFlowPDto = req.query as QueryFlowPDto;
 
         return {
@@ -29,12 +30,21 @@ export class FlowPController {
         }
     }
 
-    async getAll(req: FastifyRequest, reply: FastifyReply) {
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
         const queryFlowPDto = req.query as Partial<QueryFlowPDto>;
 
         return {
             success: true,
             data: await this.flowPService.getAll(queryFlowPDto)
+        }
+    }
+
+    async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
+        const deleteFlowPDto = req.body as DeleteFlowPDto;
+
+        return {
+            success: true,
+            data: await this.flowPService.deleteMany(deleteFlowPDto.ids)
         }
     }
 }

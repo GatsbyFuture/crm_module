@@ -54,4 +54,12 @@ export class FlowPService {
             throw e;
         }
     }
+
+    async deleteMany(ids: number[]): Promise<Partial<IFlowP>[]> {
+        try {
+            return await this.flowPModel.deleteMany(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

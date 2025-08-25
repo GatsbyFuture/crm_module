@@ -55,3 +55,24 @@ export const optsGetAllFlowP: RouteShorthandOptions = {
         querystring: queryGetAllFlowP,
     }
 }
+
+const delManyFlowP = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyFlowP: RouteShorthandOptions = {
+    schema: {
+        body: delManyFlowP
+    }
+}
