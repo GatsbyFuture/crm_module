@@ -57,7 +57,7 @@ fastify.register(pgsqlPlugin);
 
 fastify.register(flowPRoute, {prefix: '/flow-platform'});
 fastify.register(flowSRoute, {prefix: '/flow-setting'});
-fastify.register(utmRoute, {prefix: '/utm-tag'});
+fastify.register(utmRoute, {prefix: '/utm'});
 
 const start = async () => {
     try {

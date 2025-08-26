@@ -5,13 +5,14 @@ import {optsCreateUtm, optsDelManyUtm, optsGetAllUtm, optsGetOneUtm} from "./val
 export default async function utmRoute(fastify: FastifyInstance) {
     const utmController = new UtmController(fastify);
 
-    fastify.post('/create', optsCreateUtm, utmController.create.bind(utmController));
+    fastify.post('/create-tag', optsCreateUtm, utmController.create.bind(utmController));
 
-    fastify.get('/get-one', optsGetOneUtm, utmController.getOne.bind(utmController));
+    fastify.get('/get-one-tag', optsGetOneUtm, utmController.getOne.bind(utmController));
 
-    fastify.get('/get-all', optsGetAllUtm, utmController.getAll.bind(utmController));
+    fastify.get('/get-all-tags', optsGetAllUtm, utmController.getAll.bind(utmController));
 
-    fastify.delete('/delete-many', optsDelManyUtm, utmController.deleteMany.bind(utmController));
+    fastify.delete('/delete-many-tags', optsDelManyUtm, utmController.deleteMany.bind(utmController));
 
     // FOR DIRECTION
+    // fastify.post('/create-lead');
 }

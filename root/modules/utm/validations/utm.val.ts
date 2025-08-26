@@ -7,7 +7,7 @@ const createUtm = {
         url: {
             type: 'string',
             maxLength: 100,
-            pattern: '^https://.*'
+            pattern: '^https?://.*',
         },
         utm_source: {
             type: 'string',

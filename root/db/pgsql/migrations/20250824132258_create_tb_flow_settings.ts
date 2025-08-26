@@ -26,9 +26,12 @@ export async function up(knex: Knex): Promise<void> {
 
             t.string('name', 100).notNullable();
 
-            t.integer('board_id').notNullable().defaultTo(0);
+            t.integer('board_id').notNullable();
             t.integer('column_id').notNullable().defaultTo(0);
+
+            t.string('title', 200).notNullable();
             t.string('desc', 100).notNullable().defaultTo('');
+            t.integer('priority_id').notNullable().defaultTo(0);
 
             t.jsonb('meta').notNullable().defaultTo('{}');
 
