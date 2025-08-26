@@ -29,7 +29,11 @@ interface Config {
             DB_PORT: number;
         }
     },
-    EXTRA_DATA: {}
+    EXTRA_DATA: {
+        CLIENT_MODULE: {
+            URL: string,
+        }
+    }
 }
 
 export const config: Config = {
@@ -59,7 +63,11 @@ export const config: Config = {
             DB_PORT: Number(getConfigEnv('REDIS_HOST', '6379')),
         }
     },
-    EXTRA_DATA: {}
+    EXTRA_DATA: {
+        CLIENT_MODULE: {
+            URL: getConfigEnv('CLIENT_MODULE', '127.0.0.1'),
+        }
+    }
 }
 
 function getConfigEnv(name: string, initial = ''): string {

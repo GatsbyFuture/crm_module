@@ -1,8 +1,8 @@
 import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {UtmService} from "./utm.service";
-import {CreateUtmDto} from "./dto/create.utm.dto";
-import {QueryUtmDto} from "./dto/query.utm.dto";
-import {DeleteUtmDto} from "./dto/delete.utm.dto";
+import {CreateUtmTagDto} from "./dto/tag/create.utm.tag.dto";
+import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
+import {DeleteUtmTagDto} from "./dto/tag/delete.utm.tag.dto";
 
 export class UtmController {
     private utmService: UtmService;
@@ -12,7 +12,7 @@ export class UtmController {
     }
 
     async create(req: FastifyRequest, _reply: FastifyReply) {
-        const createUtmDto = req.body as CreateUtmDto;
+        const createUtmDto = req.body as CreateUtmTagDto;
 
         return {
             success: true,
@@ -21,7 +21,7 @@ export class UtmController {
     }
 
     async getOne(req: FastifyRequest, _reply: FastifyReply) {
-        const queryUtmDto = req.query as Partial<QueryUtmDto>;
+        const queryUtmDto = req.query as Partial<QueryUtmTagDto>;
 
         return {
             success: true,
@@ -30,7 +30,7 @@ export class UtmController {
     }
 
     async getAll(req: FastifyRequest, _reply: FastifyReply) {
-        const queryUtmDto = req.query as Partial<QueryUtmDto>;
+        const queryUtmDto = req.query as Partial<QueryUtmTagDto>;
 
         return {
             success: true,
@@ -39,11 +39,13 @@ export class UtmController {
     }
 
     async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
-        const deleteUtmDto = req.body as DeleteUtmDto;
+        const deleteUtmDto = req.body as DeleteUtmTagDto;
 
         return {
             success: true,
             data: await this.utmService.deleteMany(deleteUtmDto.ids),
         }
     }
+
+
 }

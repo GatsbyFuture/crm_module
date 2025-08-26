@@ -6,7 +6,10 @@ export interface CreateFlowSDto {
 
     readonly board_id: number;
     readonly column_id: number;
+
+    readonly title: string;
     readonly desc: string;
+    readonly priority_id: number;
 
     readonly meta: object;
 }

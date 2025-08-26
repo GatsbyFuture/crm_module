@@ -3,8 +3,8 @@ import {config} from '../../../config/config';
 
 import {IUtm} from "../interfaces/utm.interface";
 
-import {CreateUtmDto} from "../dto/create.utm.dto";
-import {QueryUtmDto} from "../dto/query.utm.dto";
+import {CreateUtmTagDto} from "../dto/tag/create.utm.tag.dto";
+import {QueryUtmTagDto} from "../dto/tag/query.utm.tag.dto";
 
 const {
     DB_DATA: {
@@ -20,17 +20,17 @@ export class UtmModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createUtmDto: CreateUtmDto): Promise<IUtm> {
+    async create(createUtmDto: CreateUtmTagDto): Promise<IUtm> {
         return this.fastify.pgsql(TB_UTM_TAGS).insert(createUtmDto)
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: Partial<QueryUtmDto>): Promise<IUtm | undefined> {
+    async readOne(query: Partial<QueryUtmTagDto>): Promise<IUtm | undefined> {
         return this.fastify.pgsql(TB_UTM_TAGS).select('*')
             .where(query).first();
     }
 
-    async readAll(query: Partial<QueryUtmDto>): Promise<IUtm[]> {
+    async readAll(query: Partial<QueryUtmTagDto>): Promise<IUtm[]> {
         return this.fastify.pgsql(TB_UTM_TAGS).select('*')
             .where(query);
     }

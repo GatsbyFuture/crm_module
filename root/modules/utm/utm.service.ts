@@ -3,12 +3,11 @@ import {UtmModel} from "./models/utm.model";
 
 import {IUtm} from "./interfaces/utm.interface";
 
-import {CreateUtmDto} from "./dto/create.utm.dto";
 import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
-import {QueryFlowPDto} from "../flow_platform/dto/query.flow.p.dto";
-import {IFlowP} from "../flow_platform/interfaces/flow.p.interface";
-import {QueryUtmDto} from "./dto/query.utm.dto";
+
+import {CreateUtmTagDto} from "./dto/tag/create.utm.tag.dto";
+import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -17,7 +16,7 @@ export class UtmService {
         this.utmModel = new UtmModel(fastify);
     }
 
-    async create(createUtmDto: CreateUtmDto): Promise<IUtm> {
+    async create(createUtmDto: CreateUtmTagDto): Promise<IUtm> {
         try {
             const {url, utm_source} = createUtmDto;
 
@@ -33,7 +32,7 @@ export class UtmService {
         }
     }
 
-    async getOne(query: Partial<QueryUtmDto>): Promise<IUtm | undefined> {
+    async getOne(query: Partial<QueryUtmTagDto>): Promise<IUtm | undefined> {
         try {
             const utm_tag = await this.utmModel.readOne(query);
 
@@ -47,7 +46,7 @@ export class UtmService {
         }
     }
 
-    async getAll(query: Partial<QueryUtmDto>): Promise<IUtm[]> {
+    async getAll(query: Partial<QueryUtmTagDto>): Promise<IUtm[]> {
         try {
             return this.utmModel.readAll(query);
         } catch (e) {
@@ -62,4 +61,7 @@ export class UtmService {
             throw e;
         }
     }
+
+    // FOR UTM LEAD
+    // async utmLead()
 }

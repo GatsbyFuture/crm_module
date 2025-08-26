@@ -6,8 +6,8 @@ import * as fs from "node:fs";
 
 import errorPlugin from "./plugins/error";
 import pgsqlPlugin from './plugins/pgsql';
+import axiosPlugin from './plugins/axios';
 // import redisPlugin from './plugins/redis';
-// import axiosPlugin from './plugins/axios';
 // import cronPlugin from './plugins/cron';
 
 import flowPRoute from "./modules/flow_platform/flow.p.route";
@@ -51,8 +51,8 @@ fastify.register(cors, {
 
 fastify.register(errorPlugin);
 fastify.register(pgsqlPlugin);
+fastify.register(axiosPlugin);
 // fastify.register(redisPlugin);
-// fastify.register(axiosPlugin);
 // fastify.register(cronPlugin);
 
 fastify.register(flowPRoute, {prefix: '/flow-platform'});

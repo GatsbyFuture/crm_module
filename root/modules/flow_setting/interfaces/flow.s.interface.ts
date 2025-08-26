@@ -8,7 +8,10 @@ export interface IFlowS {
 
     board_id: number;
     column_id: number;
+
+    title: string;
     desc: string;
+    priority_id: number;
 
     meta: object;
 

@@ -1,4 +1,4 @@
-export interface CreateUtmDto {
+export interface CreateUtmTagDto {
     readonly url: string;
     readonly utm_source: string;
     readonly utm_content: string;
