@@ -10,6 +10,7 @@ import {ErrorCodes} from "../../enums/error.codes";
 import {CreateUtmTagDto} from "./dto/tag/create.utm.tag.dto";
 import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
+import {IClient} from "./interfaces/utm.client.interface";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -71,11 +72,15 @@ export class UtmService {
         try {
             const {phone_number, full_name, utm_source, meta} = createUtmLeadDto;
 
-            const client = await this.utmTools.getClient(phone_number);
+            let client: IClient | undefined;
+
+            client = await this.utmTools.getClient(phone_number);
 
             if (!client) {
-                
+                client = await this.utmTools.createClient(createUtmLeadDto);
             }
+
+            return client;
         } catch (e) {
             throw e;
         }
