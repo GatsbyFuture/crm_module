@@ -1,8 +1,11 @@
 import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {UtmService} from "./utm.service";
+
 import {CreateUtmTagDto} from "./dto/tag/create.utm.tag.dto";
 import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 import {DeleteUtmTagDto} from "./dto/tag/delete.utm.tag.dto";
+
+import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 
 export class UtmController {
     private utmService: UtmService;
@@ -47,5 +50,13 @@ export class UtmController {
         }
     }
 
+    // FOR UTM LEAD
+    async createLead(req: FastifyRequest, _reply: FastifyReply) {
+        const createUtmLeadDto = req.body as CreateUtmLeadDto;
 
+        return {
+            success: true,
+            data: await this.utmService.createLead(createUtmLeadDto)
+        }
+    }
 }

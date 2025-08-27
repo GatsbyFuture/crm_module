@@ -14,5 +14,5 @@ export default async function utmRoute(fastify: FastifyInstance) {
     fastify.delete('/delete-many-tags', optsDelManyUtm, utmController.deleteMany.bind(utmController));
 
     // FOR DIRECTION
-    // fastify.post('/create-lead');
+    fastify.post('/create-lead', utmController.createLead.bind(utmController));
 }

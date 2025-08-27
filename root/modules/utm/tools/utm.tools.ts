@@ -17,6 +17,7 @@ export class UtmTools {
 
     async getClient(phone_number: string): Promise<IClient | undefined> {
         try {
+            console.log("CLIENT_URL", CLIENT_URL)
             const {data: response} = await this.fastify.axios({
                 method: 'GET',
                 url: `${CLIENT_URL}/user/get-one`,
@@ -30,7 +31,7 @@ export class UtmTools {
             return data;
         } catch (e) {
             // WE MUST SEND ERROR TO TELEGRAM BOT.
-            this.fastify.log.error(`❌ KPI API error [getKpi]: ${e}`);
+            this.fastify.log.error(`❌ KPI API error [getClient]: ${e}`);
             throw e;
         }
     }
