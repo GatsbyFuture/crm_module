@@ -12,6 +12,8 @@ import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 import {IClient} from "./interfaces/utm.client.interface";
 import {ILead} from "./interfaces/utm.lead.interface";
+import {CreateLeadDto} from "./dto/lead/create.lead.dto";
+import {CreateClientDto} from "./dto/lead/create.client.dto";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -71,7 +73,7 @@ export class UtmService {
     // FOR UTM LEAD
     async createLead(createUtmLeadDto: CreateUtmLeadDto): Promise<any> {
         try {
-            const {phone_number, full_name, utm_source, meta} = createUtmLeadDto;
+            const {phone_number, full_name, utm_source, extra, time_period} = createUtmLeadDto;
 
             let client: IClient | undefined;
             let lead: ILead | undefined;
@@ -79,11 +81,25 @@ export class UtmService {
             client = await this.utmTools.getClient(phone_number);
 
             if (!client) {
-                client = await this.utmTools.createClient(createUtmLeadDto);
+                const createClientDto: CreateClientDto = {
+                    phone_number: phone_number,
+                    full_name: full_name,
+                }
 
-                if (!client) {
+                client = await this.utmTools.createClient(createClientDto);
 
-                    // lead = await this.utmTools.createLead()
+                if (client) {
+                    // const platform = await
+
+                    const createLeadDto: CreateLeadDto = {
+                        platform_id: 1, // WE CAN GET FROM PLATFORM
+                        client_id: client.id,
+                        status: "BASE", // WE CAN GET FROM PLATFORM
+                        extra: extra,
+                        time_period: time_period || null
+                    }
+
+                    lead = await this.utmTools.createLead(createLeadDto);
                 }
             }
 

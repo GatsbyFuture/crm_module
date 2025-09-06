@@ -2,9 +2,10 @@ import type {FastifyInstance} from "fastify";
 import {config} from '../../../config/config';
 
 import {IClient} from "../interfaces/utm.client.interface";
-import {CreateUtmLeadDto} from "../dto/lead/create.utm.lead.dto";
 import {ILead} from "../interfaces/utm.lead.interface";
+
 import {CreateLeadDto} from "../dto/lead/create.lead.dto";
+import {CreateClientDto} from "../dto/lead/create.client.dto";
 
 const {
     EXTRA_DATA: {
@@ -39,7 +40,7 @@ export class UtmTools {
         }
     }
 
-    async createClient(createUtmLeadDto: CreateUtmLeadDto): Promise<IClient | undefined> {
+    async createClient(createUtmLeadDto: CreateClientDto): Promise<IClient | undefined> {
         try {
             const {data: response} = await this.fastify.axios({
                 method: 'POST',
