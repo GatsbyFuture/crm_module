@@ -4,6 +4,7 @@ export interface IFlowP {
     name: string;
     meta: object;
     weight: number;
+    status: string;
     is_active: boolean;
     updated_at: Date;
     created_at: Date;

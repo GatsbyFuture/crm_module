@@ -12,6 +12,11 @@ const createFlowP = {
         name: {type: 'string', minLength: 1},
         meta: {type: 'object'},
         weight: {type: 'number'},
+        status: {
+            type: 'string',
+            pattern: '^[A-Z]+$',
+            minLength: 1
+        }
     }
 }
 

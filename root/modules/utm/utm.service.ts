@@ -1,5 +1,6 @@
 import type {FastifyInstance} from "fastify";
 import {UtmModel} from "./models/utm.model";
+import {FlowPModel} from "../flow_platform/models/flow.p.model";
 import {UtmTools} from "./tools/utm.tools";
 
 import {IUtm} from "./interfaces/utm.interface";
@@ -17,10 +18,12 @@ import {CreateClientDto} from "./dto/lead/create.client.dto";
 
 export class UtmService {
     private utmModel: UtmModel;
+    private flowPModel: FlowPModel;
     private utmTools: UtmTools;
 
     constructor(protected fastify: FastifyInstance) {
         this.utmModel = new UtmModel(fastify);
+        this.flowPModel = new FlowPModel(fastify);
         this.utmTools = new UtmTools(fastify);
     }
 
@@ -89,17 +92,19 @@ export class UtmService {
                 client = await this.utmTools.createClient(createClientDto);
 
                 if (client) {
-                    // const platform = await
+                    const platform = await this.flowPModel.readOne({code: utm_source});
 
                     const createLeadDto: CreateLeadDto = {
-                        platform_id: 1, // WE CAN GET FROM PLATFORM
+                        platform_id: platform?.id || 1, // WE CAN GET FROM PLATFORM
                         client_id: client.id,
-                        status: "BASE", // WE CAN GET FROM PLATFORM
+                        status: platform?.status || "BASE", // WE CAN GET FROM PLATFORM
                         extra: extra,
                         time_period: time_period || null
                     }
 
                     lead = await this.utmTools.createLead(createLeadDto);
+
+                    console.log(lead);
                 }
             }
 

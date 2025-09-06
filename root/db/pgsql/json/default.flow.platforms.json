@@ -1,6 +1,11 @@
 {
   "values": [
     {
+      "code": "OTHER",
+      "name": "Other",
+      "weight": 0
+    },
+    {
       "code": "FACEBOOK",
       "name": "Facebook",
       "weight": 100
@@ -24,11 +29,6 @@
       "code": "WHATSAPP",
       "name": "WhatsApp",
       "weight": 60
-    },
-    {
-      "code": "OTHER",
-      "name": "Other",
-      "weight": 0
     }
   ]
 }

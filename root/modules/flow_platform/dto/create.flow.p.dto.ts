@@ -3,4 +3,5 @@ export interface CreateFlowPDto {
     readonly name: string;
     readonly meta: object;
     readonly weight: number;
+    readonly status: string;
 }
