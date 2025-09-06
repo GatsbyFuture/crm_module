@@ -3,6 +3,8 @@ import {config} from '../../../config/config';
 
 import {IClient} from "../interfaces/utm.client.interface";
 import {CreateUtmLeadDto} from "../dto/lead/create.utm.lead.dto";
+import {ILead} from "../interfaces/utm.lead.interface";
+import {CreateLeadDto} from "../dto/lead/create.lead.dto";
 
 const {
     EXTRA_DATA: {
@@ -54,6 +56,26 @@ export class UtmTools {
             return response.data;
         } catch (e) {
             this.fastify.log.error(`❌ CLIENT API error [createClient]: ${e}`);
+            throw e;
+        }
+    }
+
+    async createLead(createLeadDto: CreateLeadDto): Promise<ILead | undefined> {
+        try {
+            const {data: response} = await this.fastify.axios({
+                method: 'POST',
+                url: `${CLIENT_URL}/lead/create`,
+                headers: {'Content-Type': 'application/json'},
+                data: createLeadDto,
+                validateStatus: (s) => s < 500
+            });
+
+            if (!response) {
+                return undefined;
+            }
+
+            return response.data;
+        } catch (e) {
             throw e;
         }
     }

@@ -61,7 +61,7 @@ fastify.register(utmRoute, {prefix: '/utm'});
 
 const start = async () => {
     try {
-        const port: number = parseInt(process.env.PORT || "5751", 10);
+        const port: number = parseInt(process.env.PORT || "5301", 10);
         await fastify.listen({port: port, host: '0.0.0.0'});
         console.log('Server listening on port :', port);
     } catch (e) {

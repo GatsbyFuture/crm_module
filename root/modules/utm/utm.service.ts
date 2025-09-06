@@ -11,6 +11,7 @@ import {CreateUtmTagDto} from "./dto/tag/create.utm.tag.dto";
 import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 import {IClient} from "./interfaces/utm.client.interface";
+import {ILead} from "./interfaces/utm.lead.interface";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -73,11 +74,17 @@ export class UtmService {
             const {phone_number, full_name, utm_source, meta} = createUtmLeadDto;
 
             let client: IClient | undefined;
+            let lead: ILead | undefined;
 
             client = await this.utmTools.getClient(phone_number);
 
             if (!client) {
                 client = await this.utmTools.createClient(createUtmLeadDto);
+
+                if (!client) {
+
+                    // lead = await this.utmTools.createLead()
+                }
             }
 
             return client;
