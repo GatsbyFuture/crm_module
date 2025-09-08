@@ -8,6 +8,7 @@ import {CreateLeadDto} from "../dto/lead/create.lead.dto";
 import {CreateClientDto} from "../dto/lead/create.client.dto";
 import {CreateTaskDto} from "../dto/lead/create.task.dto";
 import {ITask} from "../interfaces/utm.task.interface";
+import {IColumn} from "../interfaces/utm.column.interface";
 
 const {
     EXTRA_DATA: {
@@ -102,6 +103,23 @@ export class UtmTools {
 
             return response.data;
         } catch (e) {
+            throw e;
+        }
+    }
+
+    async getColumns(board_id: number): Promise<IColumn[]> {
+        try {
+            const {data: response} = await this.fastify.axios({
+                method: 'GET',
+                url: `${KANBAN_URL}/column/get-all`,
+                params: {board_id},
+                validateStatus: (s) => s < 500,
+            });
+
+            return response.data;
+        } catch (e) {
+            // WE MUST SEND ERROR TO TELEGRAM BOT.
+            this.fastify.log.error(`❌ CLIENT API error [getColumns]: ${e}`);
             throw e;
         }
     }

@@ -116,9 +116,28 @@ export class UtmService {
                     const flow_s = await this.flowSModel.readOne({platform_code: flow_p?.code});
 
                     if (flow_s) {
+                        let column_id: number = flow_s?.column_id;
+
+                        if (!column_id) {
+                            const columns = await this.utmTools.getColumns(flow_s.board_id);
+
+                            const low_value_column = columns.reduce((acc, column) => {
+                                    if (column.tasks.length <= acc.low_value) {
+                                        acc.low_value = column.tasks.length;
+                                        acc.column_id = column.id;
+                                    }
+
+                                    return acc;
+                                },
+                                {low_value: Infinity, column_id: 0}
+                            );
+
+                            column_id = low_value_column.column_id;
+                        }
+
                         const createTaskDto: CreateTaskDto = {
                             board_id: flow_s.board_id,
-                            column_id: flow_s.column_id,
+                            column_id: column_id,
                             title: flow_s.title || `${full_name.last_name} ${full_name.first_name}`,
                             due_date: flow_s.due_date,
                             has_lead: true,
