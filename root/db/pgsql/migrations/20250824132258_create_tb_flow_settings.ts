@@ -29,11 +29,12 @@ export async function up(knex: Knex): Promise<void> {
             t.integer('board_id').notNullable();
             t.integer('column_id').notNullable().defaultTo(0);
 
-            t.string('title', 200).notNullable();
-            t.string('desc', 100).notNullable().defaultTo('');
+            t.string('title', 200).notNullable().defaultTo('');
+            t.string('description', 100).notNullable().defaultTo('');
             t.integer('priority_id').notNullable().defaultTo(0);
+            t.date('due_date').defaultTo(null);
 
-            t.jsonb('meta').notNullable().defaultTo('{}');
+            t.jsonb('meta').notNullable().defaultTo(knex.raw(`\'{}\'::jsonb`));
 
             t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamps(true, true);

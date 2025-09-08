@@ -90,21 +90,24 @@ export class UtmService {
                 }
 
                 client = await this.utmTools.createClient(createClientDto);
+            }
 
-                if (client) {
-                    const platform = await this.flowPModel.readOne({code: utm_source});
+            if (client) {
+                const platform = await this.flowPModel.readOne({code: utm_source});
 
-                    const createLeadDto: CreateLeadDto = {
-                        platform_id: platform?.id || 1, // WE CAN GET FROM PLATFORM
-                        client_id: client.id,
-                        status: platform?.status || "BASE", // WE CAN GET FROM PLATFORM
-                        extra: extra,
-                        time_period: time_period || null
-                    }
+                const createLeadDto: CreateLeadDto = {
+                    platform_id: platform?.id || 1, // WE CAN GET FROM PLATFORM
+                    client_id: client.id,
+                    status: platform?.status || "BASE", // WE CAN GET FROM PLATFORM
+                    extra: extra,
+                    time_period: time_period || null
+                }
 
-                    lead = await this.utmTools.createLead(createLeadDto);
+                lead = await this.utmTools.createLead(createLeadDto);
 
+                if (lead) {
                     console.log(lead);
+
                 }
             }
 
