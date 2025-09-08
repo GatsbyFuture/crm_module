@@ -13,6 +13,9 @@ const {
     EXTRA_DATA: {
         CLIENT_MODULE: {
             URL: CLIENT_URL
+        },
+        KANBAN_MODULE: {
+            URL: KANBAN_URL
         }
     }
 } = config;
@@ -70,7 +73,7 @@ export class UtmTools {
                 url: `${CLIENT_URL}/lead/create`,
                 headers: {'Content-Type': 'application/json'},
                 data: createLeadDto,
-                validateStatus: (s) => s < 500
+                // validateStatus: (s) => s < 500
             });
 
             if (!response) {
@@ -87,10 +90,10 @@ export class UtmTools {
         try {
             const {data: response} = await this.fastify.axios({
                 method: 'POST',
-                url: `${CLIENT_URL}/task/create`,
+                url: `${KANBAN_URL}/task/create`,
                 headers: {'Content-Type': 'application/json'},
                 data: createTaskDto,
-                validateStatus: (s) => s < 500
+                // validateStatus: (s) => s < 500
             });
 
             if (!response) {

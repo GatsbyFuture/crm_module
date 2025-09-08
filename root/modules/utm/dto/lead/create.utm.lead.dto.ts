@@ -8,4 +8,5 @@ export interface CreateUtmLeadDto {
     readonly utm_source: string;
     readonly extra: object;
     readonly time_period: Date;
+    readonly meta: object;
 }

@@ -10,7 +10,8 @@ const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
-                TB_UTM_TAGS
+                TB_UTM_TAGS,
+                TB_FLOW_LOGS
             }
         }
     }
@@ -39,4 +40,11 @@ export class UtmModel {
         return this.fastify.pgsql(TB_UTM_TAGS).whereIn('id', ids)
             .returning(['url', 'utm_source']).del();
     }
+
+    // UTM LEAD LOGS
+    async createLogs(log: object): Promise<void> {
+        await this.fastify.pgsql(TB_FLOW_LOGS).insert(log);
+    }
+
+    // async readLogs(queryLogs: object):
 }

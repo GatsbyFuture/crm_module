@@ -14,9 +14,9 @@ interface Config {
             },
             TABLES: {
                 TB_FLOW_PLATFORMS: string,
-                // TB_FLOW_SOURCES: string,
                 TB_FLOW_SETTINGS: string,
                 TB_UTM_TAGS: string,
+                TB_FLOW_LOGS: string,
             },
             SEED_DATA: {
                 FLOW_PLATFORMS_PATH: string,
@@ -51,9 +51,9 @@ export const config: Config = {
             },
             TABLES: {
                 TB_FLOW_PLATFORMS: 'tb_flow_platforms',
-                // TB_FLOW_SOURCES: 'tb_flow_sources',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
-                TB_UTM_TAGS: "tb_utm_tags",
+                TB_UTM_TAGS: 'tb_utm_tags',
+                TB_FLOW_LOGS: 'tb_flow_logs',
             },
             SEED_DATA: {
                 FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platforms.json',

@@ -80,7 +80,7 @@ export class UtmService {
     // FOR UTM LEAD
     async createLead(createUtmLeadDto: CreateUtmLeadDto): Promise<any> {
         try {
-            const {phone_number, full_name, utm_source, extra, time_period} = createUtmLeadDto;
+            const {phone_number, full_name, utm_source, extra, time_period, meta} = createUtmLeadDto;
 
             let client: IClient | undefined;
             let lead: ILead | undefined;
@@ -97,12 +97,12 @@ export class UtmService {
             }
 
             if (client) {
-                const platform = await this.flowPModel.readOne({code: utm_source});
+                const flow_p = await this.flowPModel.readOne({code: utm_source});
 
                 const createLeadDto: CreateLeadDto = {
-                    platform_id: platform?.id || 1, // WE CAN GET FROM PLATFORM
+                    platform_id: flow_p?.id || 1, // WE CAN GET FROM PLATFORM
                     client_id: client.id,
-                    status: platform?.status || "BASE", // WE CAN GET FROM PLATFORM
+                    status: flow_p?.status || "BASE", // WE CAN GET FROM PLATFORM
                     extra: extra,
                     time_period: time_period || null
                 }
@@ -110,15 +110,21 @@ export class UtmService {
                 lead = await this.utmTools.createLead(createLeadDto);
 
                 if (lead) {
-                    console.log(lead);
+                    const flow_s = await this.flowSModel.readOne({platform_code: flow_p?.code});
 
+                    if (flow_s) {
+                        const createTaskDto: CreateTaskDto = {
+                            board_id: flow_s.board_id,
+                            column_id: flow_s.column_id,
+                            title: flow_s.title || `${full_name.last_name} ${full_name.first_name}`,
+                            due_date: flow_s.due_date,
+                            has_lead: true,
+                            lead_id: lead.id,
+                            meta: meta || {}
+                        };
 
-                    // const createTaskDto: CreateTaskDto = {
-                    //     // board_id: platform
-                    // };
-                    // const task = await this.utmTools.createTask();
-
-                    // console.log(task);
+                        const task = await this.utmTools.createTask(createTaskDto);
+                    }
                 }
             }
 

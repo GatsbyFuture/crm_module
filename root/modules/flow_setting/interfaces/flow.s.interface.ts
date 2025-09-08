@@ -12,6 +12,7 @@ export interface IFlowS {
     title: string;
     desc: string;
     priority_id: number;
+    due_date: Date;
 
     meta: object;
 
