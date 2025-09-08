@@ -42,9 +42,11 @@ export class UtmModel {
     }
 
     // UTM LEAD LOGS
-    async createLogs(log: object): Promise<void> {
-        await this.fastify.pgsql(TB_FLOW_LOGS).insert(log);
-    }
+    // async createLogs(log: object): Promise<void> {
+    //     await this.fastify.pgsql(TB_FLOW_LOGS).insert(log);
+    // }
 
-    // async readLogs(queryLogs: object):
+    // async readLogs(query: object): Promise<any> {
+    //     return this.fastify.pgsql(TB_FLOW_LOGS).select('*').where(query);
+    // }
 }

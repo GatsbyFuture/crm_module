@@ -17,6 +17,8 @@ import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 import {CreateLeadDto} from "./dto/lead/create.lead.dto";
 import {CreateClientDto} from "./dto/lead/create.client.dto";
 import {CreateTaskDto} from "./dto/lead/create.task.dto";
+import {CreateLogDto} from "./dto/log/create.log.dto";
+import {ITask} from "./interfaces/utm.task.interface";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -84,6 +86,7 @@ export class UtmService {
 
             let client: IClient | undefined;
             let lead: ILead | undefined;
+            let task: ITask | undefined;
 
             client = await this.utmTools.getClient(phone_number);
 
@@ -123,12 +126,12 @@ export class UtmService {
                             meta: meta || {}
                         };
 
-                        const task = await this.utmTools.createTask(createTaskDto);
+                        task = await this.utmTools.createTask(createTaskDto);
                     }
                 }
             }
 
-            return client;
+            return task;
         } catch (e) {
             throw e;
         }
