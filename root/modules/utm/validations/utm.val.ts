@@ -88,3 +88,36 @@ export const optsDelManyUtm: RouteShorthandOptions = {
         body: delManyUtm
     }
 }
+
+const createLead = {
+    type: 'object',
+    required: ['phone_number', 'full_name', 'utm_source'],
+    additionalProperties: false,
+    properties: {
+        phone_number: {
+            type: 'string',
+            minLength: 9,
+        },
+        full_name: {
+            type: 'object',
+            required: ['first_name', 'last_name'],
+            additionalProperties: false,
+            properties: {
+                first_name: {type: 'string', minLength: 1},
+                last_name: {type: 'string', minLength: 1},
+                middle_name: {type: 'string', minLength: 1, nullable: true}
+            }
+        },
+        utm_source: {type: 'string', minLength: 1},
+        extra: {
+            type: 'object',
+        },
+        meta: {
+            type: 'object',
+        }
+    }
+};
+
+export const optsCreateLead: RouteShorthandOptions = {
+    schema: {body: createLead}
+};
