@@ -16,7 +16,7 @@ interface Config {
                 TB_FLOW_PLATFORMS: string,
                 TB_FLOW_SETTINGS: string,
                 TB_UTM_TAGS: string,
-                TB_FLOW_LOGS: string,
+                TB_UTM_FORM: string,
             },
             SEED_DATA: {
                 FLOW_PLATFORMS_PATH: string,
@@ -53,7 +53,7 @@ export const config: Config = {
                 TB_FLOW_PLATFORMS: 'tb_flow_platforms',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
                 TB_UTM_TAGS: 'tb_utm_tags',
-                TB_FLOW_LOGS: 'tb_flow_logs',
+                TB_UTM_FORM: 'tb_utm_form',
             },
             SEED_DATA: {
                 FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platforms.json',

@@ -37,7 +37,7 @@ export async function up(knex: Knex): Promise<void> {
 
         await knex(TB_FLOW_PLATFORMS).insert(parsed.values);
 
-        // this is trigger for updated_at colum in tb_users
+        // this is trigger for updated_at colum in tb_flow_platforms
         await knex.raw(`
             CREATE TRIGGER update_${TB_FLOW_PLATFORMS}_updated_at
             BEFORE UPDATE ON ${TB_FLOW_PLATFORMS}

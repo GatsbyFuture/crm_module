@@ -10,8 +10,7 @@ const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
-                TB_UTM_TAGS,
-                TB_FLOW_LOGS
+                TB_UTM_TAGS
             }
         }
     }
