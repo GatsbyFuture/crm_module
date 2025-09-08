@@ -6,6 +6,8 @@ import {ILead} from "../interfaces/utm.lead.interface";
 
 import {CreateLeadDto} from "../dto/lead/create.lead.dto";
 import {CreateClientDto} from "../dto/lead/create.client.dto";
+import {CreateTaskDto} from "../dto/lead/create.task.dto";
+import {ITask} from "../interfaces/utm.task.interface";
 
 const {
     EXTRA_DATA: {
@@ -68,6 +70,26 @@ export class UtmTools {
                 url: `${CLIENT_URL}/lead/create`,
                 headers: {'Content-Type': 'application/json'},
                 data: createLeadDto,
+                validateStatus: (s) => s < 500
+            });
+
+            if (!response) {
+                return undefined;
+            }
+
+            return response.data;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async createTask(createTaskDto: CreateTaskDto): Promise<ITask | undefined> {
+        try {
+            const {data: response} = await this.fastify.axios({
+                method: 'POST',
+                url: `${CLIENT_URL}/task/create`,
+                headers: {'Content-Type': 'application/json'},
+                data: createTaskDto,
                 validateStatus: (s) => s < 500
             });
 

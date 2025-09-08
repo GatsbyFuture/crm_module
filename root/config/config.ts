@@ -32,6 +32,9 @@ interface Config {
     EXTRA_DATA: {
         CLIENT_MODULE: {
             URL: string,
+        },
+        KANBAN_MODULE: {
+            URL: string,
         }
     }
 }
@@ -66,6 +69,9 @@ export const config: Config = {
     EXTRA_DATA: {
         CLIENT_MODULE: {
             URL: getConfigEnv('CLIENT_MODULE', '127.0.0.1'),
+        },
+        KANBAN_MODULE: {
+            URL: getConfigEnv('KANBAN_MODULE', '127.0.0.1'),
         }
     }
 }

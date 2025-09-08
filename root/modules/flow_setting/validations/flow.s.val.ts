@@ -10,6 +10,7 @@ const createFlowS = {
         board_id: {type: 'integer', minimum: 1},
         column_id: {type: 'integer', minimum: 1},
         desc: {type: 'string'},
+        due_date: {type: 'string'},
         meta: {type: 'object'},
     }
 }
