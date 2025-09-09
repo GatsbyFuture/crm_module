@@ -6,6 +6,7 @@ import {QueryUtmTagDto} from "./dto/tag/query.utm.tag.dto";
 import {DeleteUtmTagDto} from "./dto/tag/delete.utm.tag.dto";
 
 import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
+import {CreateFormDto} from "./dto/form/create.form.dto";
 
 export class UtmController {
     private utmService: UtmService;
@@ -57,6 +58,16 @@ export class UtmController {
         return {
             success: true,
             data: await this.utmService.createLead(createUtmLeadDto)
+        }
+    }
+
+    // DYNAMIC FORM
+    async createForm(req: FastifyRequest, _reply: FastifyReply) {
+        const createFormDto = req.body as CreateFormDto;
+
+        return {
+            success: true,
+            data: await this.utmService.createForm(createFormDto),
         }
     }
 }

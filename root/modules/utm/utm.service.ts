@@ -18,6 +18,8 @@ import {CreateLeadDto} from "./dto/lead/create.lead.dto";
 import {CreateClientDto} from "./dto/lead/create.client.dto";
 import {CreateTaskDto} from "./dto/lead/create.task.dto";
 import {ITask} from "./interfaces/utm.task.interface";
+import {CreateFormDto} from "./dto/form/create.form.dto";
+import {IUtmForm} from "./interfaces/utm.form.interface";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -156,5 +158,17 @@ export class UtmService {
     }
 
     // DYNAMIC FORM
-    // async createForm()
+    async createForm(createFormDto: CreateFormDto): Promise<IUtmForm> {
+        try {
+            const form = await this.utmModel.readOneForm({title: createFormDto.title});
+
+            if (form) {
+                throw new HttpException(ErrorCodes.DATA_ALREADY_EXIST);
+            }
+
+            return this.utmModel.createForm(createFormDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

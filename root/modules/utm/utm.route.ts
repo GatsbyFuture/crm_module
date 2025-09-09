@@ -1,6 +1,11 @@
 import type {FastifyInstance} from 'fastify';
 import {UtmController} from "./utm.controller";
-import {optsCreateLead, optsCreateUtm, optsDelManyUtm, optsGetAllUtm, optsGetOneUtm} from "./validations/utm.val";
+import {
+    optsCreateLead, optsCreateUtm,
+    optsGetAllUtm, optsGetOneUtm,
+    optsDelManyUtm,
+    optsCreateForm,
+} from "./validations/utm.val";
 
 export default async function utmRoute(fastify: FastifyInstance) {
     const utmController = new UtmController(fastify);
@@ -15,4 +20,7 @@ export default async function utmRoute(fastify: FastifyInstance) {
 
     // FOR DIRECTION
     fastify.post('/create-lead', optsCreateLead, utmController.createLead.bind(utmController));
+
+    // DYNAMIC FORM
+    fastify.post('/create-form', optsCreateForm, utmController.createForm.bind(utmController));
 }

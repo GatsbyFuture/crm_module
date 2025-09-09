@@ -60,7 +60,7 @@ export class UtmModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm> {
+    async readOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm | undefined> {
         return this.fastify.pgsql(TB_UTM_FORM).select('*')
             .where(query).first();
     }

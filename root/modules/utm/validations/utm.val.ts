@@ -121,3 +121,35 @@ const createLead = {
 export const optsCreateLead: RouteShorthandOptions = {
     schema: {body: createLead}
 };
+
+const createForm = {
+    type: 'object',
+    required: ['title', 'meta'],
+    properties: {
+        title: {type: 'string', minLength: 1},
+        desc: {type: 'string', minLength: 1},
+        meta: {
+            type: 'object',
+            required: ['phone_number', 'full_name'],
+            properties: {
+                phone_number: {type: 'string', minLength: 9},
+                full_name: {
+                    type: 'object',
+                    required: ['first_name', 'last_name'],
+                    properties: {
+                        first_name: {type: 'string', minLength: 2},
+                        last_name: {type: 'string', minLength: 2},
+                        middle_name: {type: 'string', minLength: 2, nullable: true}
+                    }
+                }
+            },
+            additionalProperties: true,
+        }
+    }
+}
+
+export const optsCreateForm: RouteShorthandOptions = {
+    schema: {
+        body: createForm
+    }
+}
