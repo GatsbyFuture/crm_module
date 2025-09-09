@@ -203,6 +203,14 @@ export class UtmService {
             throw e;
         }
     }
+
+    async deleteForms(ids: number[]): Promise<Partial<IUtmForm>[]> {
+        try {
+            return this.utmModel.deleteForms(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
 
 

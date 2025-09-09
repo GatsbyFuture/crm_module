@@ -75,8 +75,8 @@ export class UtmModel {
             .where(query).returning('*');
     }
 
-    async deleteForms(query: Partial<QueryFormDto>): Promise<Partial<IUtmForm>[]> {
-        return this.fastify.pgsql(TB_UTM_FORM).select('*')
-            .where(query).first();
+    async deleteForms(ids: number[]): Promise<Partial<IUtmForm>[]> {
+        return this.fastify.pgsql(TB_UTM_FORM).whereIn('id', ids)
+            .returning(['title', 'meta']).del();
     }
 }

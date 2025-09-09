@@ -127,8 +127,8 @@ const createForm = {
     type: 'object',
     required: ['title', 'meta'],
     properties: {
-        title: {type: 'string', minLength: 1},
-        desc: {type: 'string', minLength: 1},
+        title: {type: 'string', minLength: 1, maxLength: 80},
+        desc: {type: 'string', minLength: 1, maxLength: 200},
         meta: {
             type: 'object',
             required: ['phone_number', 'full_name'],
@@ -190,8 +190,8 @@ export const optsQueryAllForms: RouteShorthandOptions = {
 const updateForms = {
     type: 'object',
     properties: {
-        title: {type: 'string', minLength: 1},
-        desc: {type: 'string', minLength: 1, nullable: true},
+        title: {type: 'string', minLength: 1, maxLength: 80},
+        desc: {type: 'string', minLength: 1, maxLength: 200},
         meta: {
             type: 'object',
             required: ['phone_number', 'full_name'],
@@ -223,5 +223,26 @@ export const optsUpdateForms: RouteShorthandOptions = {
     schema: {
         querystring: queryOneForm,
         body: updateForms
+    }
+}
+
+const deleteForms = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDeleteForms: RouteShorthandOptions = {
+    schema: {
+        body: deleteForms
     }
 }
