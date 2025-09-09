@@ -23,4 +23,6 @@ export default async function utmRoute(fastify: FastifyInstance) {
 
     // DYNAMIC FORM
     fastify.post('/create-form', optsCreateForm, utmController.createForm.bind(utmController));
+
+    fastify.get('/get-one-form', utmController.getOneForm.bind(utmController));
 }

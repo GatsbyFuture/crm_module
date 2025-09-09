@@ -20,6 +20,7 @@ import {CreateTaskDto} from "./dto/lead/create.task.dto";
 import {ITask} from "./interfaces/utm.task.interface";
 import {CreateFormDto} from "./dto/form/create.form.dto";
 import {IUtmForm} from "./interfaces/utm.form.interface";
+import {QueryFormDto} from "./dto/form/query.form.dto";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -171,4 +172,36 @@ export class UtmService {
             throw e;
         }
     }
+
+    async readOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm> {
+        try {
+            const form = await this.utmModel.readOneForm(query);
+
+            if (!form) {
+                throw new HttpException(ErrorCodes.DATA_NOT_FOUND);
+            }
+
+            return form;
+        } catch (e) {
+            throw e;
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
