@@ -63,13 +63,13 @@ export class UtmController {
     }
 
     // DYNAMIC FORM
-    async createForm(req: FastifyRequest, _reply: FastifyReply) {
+    async createForm(req: FastifyRequest, reply: FastifyReply) {
         const createFormDto = req.body as CreateFormDto;
 
-        return {
+        return reply.code(201).send({
             success: true,
             data: await this.utmService.createForm(createFormDto),
-        }
+        });
     }
 
     async getOneForm(req: FastifyRequest, _reply: FastifyReply) {

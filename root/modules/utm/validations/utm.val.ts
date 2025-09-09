@@ -153,3 +153,21 @@ export const optsCreateForm: RouteShorthandOptions = {
         body: createForm
     }
 }
+
+const queryForm = {
+    type: 'object',
+    properties: {
+        id: {type: 'number', minimum: 1},
+        title: {type: 'string', minLength: 1},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['title']}
+    ]
+}
+
+export const optsQueryOneForm: RouteShorthandOptions = {
+    schema: {
+        querystring: queryForm
+    }
+}

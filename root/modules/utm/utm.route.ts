@@ -4,7 +4,7 @@ import {
     optsCreateLead, optsCreateUtm,
     optsGetAllUtm, optsGetOneUtm,
     optsDelManyUtm,
-    optsCreateForm,
+    optsCreateForm, optsQueryOneForm,
 } from "./validations/utm.val";
 
 export default async function utmRoute(fastify: FastifyInstance) {
@@ -24,5 +24,5 @@ export default async function utmRoute(fastify: FastifyInstance) {
     // DYNAMIC FORM
     fastify.post('/create-form', optsCreateForm, utmController.createForm.bind(utmController));
 
-    fastify.get('/get-one-form', utmController.getOneForm.bind(utmController));
+    fastify.get('/get-one-form', optsQueryOneForm, utmController.getOneForm.bind(utmController));
 }
