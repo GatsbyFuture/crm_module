@@ -186,3 +186,42 @@ export const optsQueryAllForms: RouteShorthandOptions = {
         querystring: queryAllForms
     }
 }
+
+const updateForms = {
+    type: 'object',
+    properties: {
+        title: {type: 'string', minLength: 1},
+        desc: {type: 'string', minLength: 1, nullable: true},
+        meta: {
+            type: 'object',
+            required: ['phone_number', 'full_name'],
+            properties: {
+                phone_number: {type: 'string', minLength: 9},
+                full_name: {
+                    type: 'object',
+                    required: ['first_name', 'last_name'],
+                    properties: {
+                        first_name: {type: 'string', minLength: 2},
+                        last_name: {type: 'string', minLength: 2},
+                        middle_name: {type: 'string', minLength: 2, nullable: true}
+                    }
+                }
+            },
+            additionalProperties: true,
+        },
+        is_active: {type: 'boolean'}
+    },
+    anyOf: [
+        {required: ['title']},
+        {required: ['desc']},
+        {required: ['meta']},
+        {required: ['is_active']},
+    ]
+}
+
+export const optsUpdateForms: RouteShorthandOptions = {
+    schema: {
+        querystring: queryOneForm,
+        body: updateForms
+    }
+}
