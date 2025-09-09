@@ -122,6 +122,7 @@ export const optsCreateLead: RouteShorthandOptions = {
     schema: {body: createLead}
 };
 
+// DYNAMIC FORM
 const createForm = {
     type: 'object',
     required: ['title', 'meta'],
@@ -154,7 +155,7 @@ export const optsCreateForm: RouteShorthandOptions = {
     }
 }
 
-const queryForm = {
+const queryOneForm = {
     type: 'object',
     properties: {
         id: {type: 'number', minimum: 1},
@@ -168,6 +169,20 @@ const queryForm = {
 
 export const optsQueryOneForm: RouteShorthandOptions = {
     schema: {
-        querystring: queryForm
+        querystring: queryOneForm
+    }
+}
+
+const queryAllForms = {
+    type: 'object',
+    properties: {
+        id: {type: 'number', minimum: 1},
+        title: {type: 'string', minLength: 1},
+    }
+}
+
+export const optsQueryAllForms: RouteShorthandOptions = {
+    schema: {
+        querystring: queryAllForms
     }
 }

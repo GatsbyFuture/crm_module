@@ -173,7 +173,7 @@ export class UtmService {
         }
     }
 
-    async readOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm> {
+    async getOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm> {
         try {
             const form = await this.utmModel.readOneForm(query);
 
@@ -182,6 +182,14 @@ export class UtmService {
             }
 
             return form;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getAllForms(query: Partial<QueryFormDto>): Promise<IUtmForm[]> {
+        try {
+            return this.utmModel.readAllForms(query);
         } catch (e) {
             throw e;
         }

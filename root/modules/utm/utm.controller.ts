@@ -77,7 +77,16 @@ export class UtmController {
 
         return {
             success: true,
-            data: await this.utmService.readOneForm(queryFormDto),
+            data: await this.utmService.getOneForm(queryFormDto)
+        }
+    }
+
+    async getAllForms(req: FastifyRequest, _reply: FastifyReply) {
+        const queryFormDto = req.query as Partial<QueryFormDto>;
+
+        return {
+            success: true,
+            data: await this.utmService.getAllForms(queryFormDto)
         }
     }
 }
