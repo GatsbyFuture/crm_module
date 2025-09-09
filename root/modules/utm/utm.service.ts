@@ -17,7 +17,6 @@ import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 import {CreateLeadDto} from "./dto/lead/create.lead.dto";
 import {CreateClientDto} from "./dto/lead/create.client.dto";
 import {CreateTaskDto} from "./dto/lead/create.task.dto";
-import {CreateLogDto} from "./dto/log/create.log.dto";
 import {ITask} from "./interfaces/utm.task.interface";
 
 export class UtmService {

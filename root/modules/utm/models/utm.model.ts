@@ -5,12 +5,17 @@ import {IUtm} from "../interfaces/utm.interface";
 
 import {CreateUtmTagDto} from "../dto/tag/create.utm.tag.dto";
 import {QueryUtmTagDto} from "../dto/tag/query.utm.tag.dto";
+import {IUtmForm} from "../interfaces/utm.form.interface";
+import {CreateFormDto} from "../dto/form/create.form.dto";
+import {QueryFormDto} from "../dto/form/query.form.dto";
+import {UpdateFormDto} from "../dto/form/update.form.dto";
 
 const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
-                TB_UTM_TAGS
+                TB_UTM_TAGS,
+                TB_UTM_FORM
             }
         }
     }
@@ -48,4 +53,30 @@ export class UtmModel {
     // async readLogs(query: object): Promise<any> {
     //     return this.fastify.pgsql(TB_FLOW_LOGS).select('*').where(query);
     // }
+
+    // UTM FORM
+    async createForm(createFormDto: CreateFormDto): Promise<IUtmForm> {
+        return this.fastify.pgsql(TB_UTM_FORM).insert(createFormDto)
+            .returning('*').then(rows => rows[0]);
+    }
+
+    async readOneForm(query: Partial<QueryFormDto>): Promise<IUtmForm> {
+        return this.fastify.pgsql(TB_UTM_FORM).select('*')
+            .where(query).first();
+    }
+
+    async readAllForms(query: Partial<QueryFormDto>): Promise<IUtmForm[]> {
+        return this.fastify.pgsql(TB_UTM_FORM).select('*')
+            .where(query);
+    }
+
+    async updateForms(query: Partial<QueryFormDto>, update: Partial<UpdateFormDto>): Promise<IUtmForm[]> {
+        return this.fastify.pgsql(TB_UTM_FORM).update(update)
+            .where(query).returning('*');
+    }
+
+    async deleteForms(query: Partial<QueryFormDto>): Promise<Partial<IUtmForm>[]> {
+        return this.fastify.pgsql(TB_UTM_FORM).select('*')
+            .where(query).first();
+    }
 }
