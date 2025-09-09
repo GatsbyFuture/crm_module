@@ -28,4 +28,6 @@ export default async function utmRoute(fastify: FastifyInstance) {
     fastify.get('/get-one-form', optsQueryOneForm, utmController.getOneForm.bind(utmController));
 
     fastify.get('/get-all-forms', optsQueryAllForms, utmController.getAllForms.bind(utmController));
+
+    fastify.patch('/update-forms', utmController.updateForms.bind(utmController));
 }

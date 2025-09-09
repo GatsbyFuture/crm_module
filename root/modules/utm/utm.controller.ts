@@ -8,6 +8,7 @@ import {DeleteUtmTagDto} from "./dto/tag/delete.utm.tag.dto";
 import {CreateUtmLeadDto} from "./dto/lead/create.utm.lead.dto";
 import {CreateFormDto} from "./dto/form/create.form.dto";
 import {QueryFormDto} from "./dto/form/query.form.dto";
+import {UpdateFormDto} from "./dto/form/update.form.dto";
 
 export class UtmController {
     private utmService: UtmService;
@@ -87,6 +88,16 @@ export class UtmController {
         return {
             success: true,
             data: await this.utmService.getAllForms(queryFormDto)
+        }
+    }
+
+    async updateForms(req: FastifyRequest, _reply: FastifyReply) {
+        const queryFormDto = req.query as Partial<QueryFormDto>;
+        const updateFormDto = req.body as Partial<UpdateFormDto>;
+
+        return {
+            success: true,
+            data: await this.utmService.updateForms(queryFormDto, updateFormDto)
         }
     }
 }

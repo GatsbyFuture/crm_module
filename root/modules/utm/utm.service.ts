@@ -21,6 +21,7 @@ import {ITask} from "./interfaces/utm.task.interface";
 import {CreateFormDto} from "./dto/form/create.form.dto";
 import {IUtmForm} from "./interfaces/utm.form.interface";
 import {QueryFormDto} from "./dto/form/query.form.dto";
+import {UpdateFormDto} from "./dto/form/update.form.dto";
 
 export class UtmService {
     private utmModel: UtmModel;
@@ -190,6 +191,14 @@ export class UtmService {
     async getAllForms(query: Partial<QueryFormDto>): Promise<IUtmForm[]> {
         try {
             return this.utmModel.readAllForms(query);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateForms(query: Partial<QueryFormDto>, update: Partial<UpdateFormDto>): Promise<IUtmForm[]> {
+        try {
+            return this.utmModel.updateForms(query, update);
         } catch (e) {
             throw e;
         }
